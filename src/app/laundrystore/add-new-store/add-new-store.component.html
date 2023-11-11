@@ -1,0 +1,128 @@
+<div mat-dialog-title>
+    <h1>Thêm mới cửa hàng</h1>
+</div>
+
+<mat-horizontal-stepper [linear]="true" #stepper>
+    <mat-step [stepControl]="enterEmailForm">
+        <form [formGroup]="enterEmailForm" (ngSubmit)="onEmailFormSubmit()">
+            <ng-template matStepLabel>Nhập email</ng-template>
+            <div mat-dialog-content class="content">
+                <div class="row">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nhập email:</mat-label>
+                        <input matInput type="text" placeholder="Ví dụ: abc@gmail.com" required
+                               formControlName="email" >
+
+                    </mat-form-field>
+                </div>
+                <div *ngIf="enterEmailForm.get('email').hasError('email')
+                        && enterEmailForm.get('email').touched">
+                    Email không đúng cú pháp
+                </div>
+            </div>
+            <div mat-dialog-actions class="action">
+                <button mat-raised-button type="button" color="warn"  [mat-dialog-close]="false">Hủy</button>
+                <button mat-raised-button type="submit" color="primary"
+                        matStepperNext>
+                    Next</button>
+            </div>
+        </form>
+    </mat-step>
+
+
+    <mat-step [stepControl]="addNewStoreForm">
+        <form [formGroup]="addNewStoreForm" (ngSubmit)="onFormSubmit()">
+            <ng-template matStepLabel>Nhập thông tin cửa hàng</ng-template>
+            <div mat-dialog-content class="content">
+                <div class="row">
+                    <mat-form-field appearance="outline">
+                        <mat-label>User ID:</mat-label>
+                        <input matInput type="text"
+                               formControlName="applicationUserID" readonly>
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Tên cửa hàng</mat-label>
+                        <input matInput type="text" placeholder="Ví dụ: Sao mai" required
+                               formControlName="name">
+                    </mat-form-field>
+                </div>
+
+                <div class="row">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Địa chỉ</mat-label>
+                        <input matInput placeholder="Ví dụ: 29, Đào Trí" required
+                               formControlName="address">
+                    </mat-form-field>
+                </div>
+
+                <div class="row">
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Giờ mở cửa</mat-label>
+                        <input matInput type="timepicker" required placeholder="Ví dụ: 9:00"
+                               formControlName="startTime">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Giờ đóng cửa</mat-label>
+                        <input matInput type="timepicker" required placeholder="Ví dụ: 17:00"
+                               formControlName="endTime">
+                    </mat-form-field>
+
+                </div>
+                <div *ngIf="addNewStoreForm.get('startTime').hasError('invalidTimeFormat') ||
+            addNewStoreForm.get('endTime').hasError('invalidTimeFormat')">
+                    Cú pháp giờ sai. Vui lòng nhập theo Giờ:Phút
+                </div>
+                <!--
+                        <div class="row">
+
+                            <mat-form-field appearance="outline">
+                                <mat-label>Giờ mở cửa</mat-label>
+                                <input placeholder="12 tiếng" aria-label="12hr format" [ngxTimepicker]="default"
+                                       readonly formControlName="startTime" >
+                                <ngx-material-timepicker #default></ngx-material-timepicker>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline">
+                                <mat-label>Giờ đóng cửa</mat-label>
+                                <input placeholder="12 tiếng" aria-label="12hr format" [ngxTimepicker]="default"
+                                       readonly formControlName="endTime" >
+                                <ngx-material-timepicker #default></ngx-material-timepicker>
+                            </mat-form-field>
+                        </div>-->
+                <!--
+                        <div class="row">
+                            <mat-radio-group aria-label="Select an option" formControlName="status">
+                                <mat-label><b>Tình trạng</b></mat-label>
+                                <mat-radio-button value="true">Hoạt động</mat-radio-button>
+                                <mat-radio-button value="false">Không hoạt động</mat-radio-button>
+                            </mat-radio-group>
+                        </div>-->
+
+                <!--        <div class="row">-->
+                <!--            <mat-form-field appearance="outline">-->
+                <!--                <mat-label>Education</mat-label>-->
+                <!--                <mat-select formControlName="education">-->
+                <!--                    <mat-option *ngFor="let val of status" [value]="val">{{val}}-->
+                <!--                    </mat-option>-->
+                <!--                </mat-select>-->
+                <!--            </mat-form-field>-->
+                <!--        </div>-->
+                <!--        <div class="row">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Experience</mat-label>
+                                <input matInput placeholder="Ex. 4" type="number" formControlName="experience">
+                            </mat-form-field>
+                        </div>-->
+            </div>
+            <div mat-dialog-actions class="action">
+                <button mat-raised-button type="button" matStepperPrevious>Back</button>
+                <button mat-raised-button type="button" color="warn" [mat-dialog-close]="false">Hủy</button>
+                <button mat-raised-button color="primary" type="submit">Thêm</button>
+            </div>
+        </form>
+    </mat-step>
+</mat-horizontal-stepper>

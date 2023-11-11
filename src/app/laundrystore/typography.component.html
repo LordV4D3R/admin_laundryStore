@@ -1,0 +1,48 @@
+<div class="main-content" >
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h2 class="title">Laundry Store List</h2>
+                        <!-- <p class="category">Here is a subtitle for this table</p> -->
+                        <div class="header-buttons">
+                          <!-- Add button in the header -->
+                          <button class="add-button" (click)="openAddStoreForm()"><i class="pe-7s-plus">
+
+                          </i>Thêm tiệm giặt ủi mới
+                          </button>
+                            <ng-template #content let-modal></ng-template>
+                        </div>
+                    </div>
+                    <div class="content table-responsive table-full-width">
+                          <table  class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                      <ng-container *ngFor="let colName of ['Email', 'Tên cửa hàng', 'Địa chỉ', 'Giờ mở cửa','Giờ đóng cửa', 'Tình trạng']">
+                                        <th>{{ colName }}</th>
+                                      </ng-container>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let row of laundryStoreData.data.items" >
+                                      <td>{{ row.applicationUser.email }}</td>
+                                      <td>{{ row.name }}</td>
+                                      <td>{{ row.address }}</td>
+                                      <td>{{ convertTime24to12(row.startTime) }}</td>
+                                      <td>{{ convertTime24to12(row.endTime)}}</td>
+                                        <td>{{ row.status ? 'Hoạt Động' : 'Ngừng Hoạt Động' }}</td>
+
+                                      <td class="action-buttons">
+                                        <button class="detail-button" (click)="viewDetail(row.id)"><i class="pe-7s-note"></i></button>
+                                        <button class="delete-button" (click)="deleteStore(row.id)"><i class="pe-7s-trash"></i></button>
+                                      </td>
+                                    </tr>
+                                </tbody>
+                          </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
